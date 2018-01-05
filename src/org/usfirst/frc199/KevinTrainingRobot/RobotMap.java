@@ -15,9 +15,10 @@ package org.usfirst.frc199.KevinTrainingRobot;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -32,35 +33,42 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * floating around.
  */
 public class RobotMap {
-    public static SpeedController drivetrainLeftMotor;
-    public static SpeedController drivetrainRightMotor;
+    public static PWMSpeedController drivetrainLeftMotor;
+    public static PWMSpeedController drivetrainRightMotor;
     public static Encoder drivetrainLeftEncoder;
     public static Encoder drivetrainRightEncoder;
     public static AnalogGyro drivetrainGyro;
-    public static RobotDrive robotDrive;
+    public static DifferentialDrive robotDrive;
     
     public static DoubleSolenoid solenoid;
 
     public static void init() {
         drivetrainLeftMotor = new Talon(0);
-        LiveWindow.addActuator("Drivetrain", "Left Motor", (Talon) drivetrainLeftMotor);
+        drivetrainLeftMotor.setName("Drivetrain", "Left Motor");
+        LiveWindow.add(drivetrainLeftMotor);
         
         drivetrainRightMotor = new Talon(1);
-        LiveWindow.addActuator("Drivetrain", "Right Motor", (Talon) drivetrainRightMotor);
+        drivetrainRightMotor.setName("Drivetrain", "Right Motor");
+        LiveWindow.add(drivetrainRightMotor);
         
         drivetrainLeftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-        LiveWindow.addSensor("Drivetrain", "Left Encoder", drivetrainLeftEncoder);
+        drivetrainLeftEncoder.setName("Drivetrain", "Left Encoder");
+        LiveWindow.add(drivetrainLeftEncoder);
         drivetrainLeftEncoder.setDistancePerPulse(1.0);
         drivetrainLeftEncoder.setPIDSourceType(PIDSourceType.kRate);
+        
         drivetrainRightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
-        LiveWindow.addSensor("Drivetrain", "Right Encoder", drivetrainRightEncoder);
+        drivetrainRightEncoder.setName("Drivetrain", "Right Encoder");
+        LiveWindow.add(drivetrainRightEncoder);
         drivetrainRightEncoder.setDistancePerPulse(1.0);
         drivetrainRightEncoder.setPIDSourceType(PIDSourceType.kRate);
+        
         drivetrainGyro = new AnalogGyro(0);
-        LiveWindow.addSensor("Drivetrain", "Gyro", drivetrainGyro);
+        drivetrainGyro.setName("Drivetrain", "Gyro");
+        LiveWindow.add(drivetrainGyro);
         drivetrainGyro.setSensitivity(0.007);
         
-        robotDrive = new RobotDrive(drivetrainLeftMotor, drivetrainRightMotor);
+        robotDrive = new DifferentialDrive(drivetrainLeftMotor, drivetrainRightMotor);
         
         
         solenoid = new DoubleSolenoid(0, 1);

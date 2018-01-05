@@ -1,11 +1,15 @@
 package org.usfirst.frc199.KevinTrainingRobot.commands;
 
+import org.usfirst.frc199.KevinTrainingRobot.Robot;
+import org.usfirst.frc199.KevinTrainingRobot.subsystems.PneumaticsInterface;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ActuateSolenoid extends Command {
+	PneumaticsInterface pneumatics = Robot.pneumatics;
 
     public ActuateSolenoid() {
         // Use requires() here to declare subsystem dependencies
@@ -18,6 +22,7 @@ public class ActuateSolenoid extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    		pneumatics.actuate();
     }
 
     // Make this return true when this Command no longer needs to run execute()

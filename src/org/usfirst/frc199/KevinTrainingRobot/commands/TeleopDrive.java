@@ -2,7 +2,7 @@ package org.usfirst.frc199.KevinTrainingRobot.commands;
 
 import org.usfirst.frc199.KevinTrainingRobot.Robot;
 
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
